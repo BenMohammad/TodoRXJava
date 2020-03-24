@@ -1,10 +1,12 @@
-package com.benmohammad.todorxjava;
+package com.benmohammad.todorxjava.tasks;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.benmohammad.todorxjava.R;
+
+public class TasksActivity extends AppCompatActivity {
 
 
 
