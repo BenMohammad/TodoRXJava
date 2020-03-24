@@ -67,7 +67,7 @@ public class Task {
         return mDescription;
     }
 
-    public boolean ismCompleted() {
+    public boolean isCompleted() {
         return mCompleted;
     }
 

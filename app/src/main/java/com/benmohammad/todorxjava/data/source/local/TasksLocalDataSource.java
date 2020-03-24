@@ -1,6 +1,5 @@
 package com.benmohammad.todorxjava.data.source.local;
 
-import android.app.ActivityManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,8 +11,6 @@ import androidx.annotation.Nullable;
 
 import com.benmohammad.todorxjava.data.Task;
 import com.benmohammad.todorxjava.data.source.TasksDataSource;
-import com.benmohammad.todorxjava.tasks.TasksContract;
-import com.benmohammad.todorxjava.tasks.TasksFilterType;
 import com.benmohammad.todorxjava.util.schedulers.BaseSchedulerProvider;
 import com.google.common.base.Optional;
 import com.squareup.sqlbrite2.BriteDatabase;
@@ -108,7 +105,7 @@ public class TasksLocalDataSource implements TasksDataSource {
         values.put(COLUMN_NAME_ENTRY_ID, task.getId());
         values.put(COLUMN_NAME_TITLE, task.getTitle());
         values.put(COLUMN_NAME_DESCRIPTION, task.getDescription());
-        values.put(COLUMN_NAME_COMPLETED, task.ismCompleted());
+        values.put(COLUMN_NAME_COMPLETED, task.isCompleted());
         mDatabaseHelper.insert(TasksPersistenceContract.TaskEntry.TABLE_NAME, values, SQLiteDatabase.CONFLICT_REPLACE);
     }
 
