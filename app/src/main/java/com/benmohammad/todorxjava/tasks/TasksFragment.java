@@ -299,15 +299,12 @@ public class TasksFragment extends Fragment implements TasksContract.View {
             TextView titleTv = rowView.findViewById(R.id.title);
             titleTv.setText(task.getTitleForList());
 
-            CheckBox completeCB = rowView.findViewById(R.id.complete_checkbox);
+            CheckBox completeCB = rowView.findViewById(R.id.complete);
 
             completeCB.setChecked(task.isCompleted());
 
-            if(task.isCompleted()) {
-                rowView.setBackgroundDrawable(parent.getContext().getResources().getDrawable(R.drawable.list_completed_touch_feedback));
-            } else {
-                rowView.setBackground(parent.getContext().getResources().getDrawable(R.drawable.feedback));
-            }
+
+
 
             completeCB.setOnClickListener(v -> {
                 if(!task.isCompleted()) {
