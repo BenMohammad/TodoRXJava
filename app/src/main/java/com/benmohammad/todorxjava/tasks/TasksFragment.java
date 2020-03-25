@@ -3,6 +3,9 @@ package com.benmohammad.todorxjava.tasks;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -205,7 +208,32 @@ public class TasksFragment extends Fragment implements TasksContract.View {
             return true;
         });
 
+        popup.show();
+
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_clear:
+                mPresenter.clearCompletedTasks();
+                break;
+            case R.id.menu_filter:
+                showFilteringPopUpMenu();
+                break;
+            case R.id.menu_refresh:
+                mPresenter.loadTasks(true);
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.tasks_fragment_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
 
     TaskItemListener mItemListener = new TaskItemListener() {
         @Override
@@ -248,6 +276,8 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         mNoTasksMainView = root.findViewById(R.id.noTasksMain);
         mNoTasksAddView = root.findViewById(R.id.noTasksAdd);
         mNoTasksAddView.setOnClickListener(v -> showAddTask());
+
+        setHasOptionsMenu(true);
 
         return root;
 
