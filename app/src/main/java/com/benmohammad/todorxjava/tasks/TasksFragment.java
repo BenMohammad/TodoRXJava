@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -25,6 +26,7 @@ import com.benmohammad.todorxjava.R;
 import com.benmohammad.todorxjava.addedittask.AddEditTaskActivity;
 import com.benmohammad.todorxjava.data.Task;
 import com.benmohammad.todorxjava.taskdetail.TaskDetailActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -275,9 +277,29 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         mNoTaskIcon = root.findViewById(R.id.noTasksIcon);
         mNoTasksMainView = root.findViewById(R.id.noTasksMain);
         mNoTasksAddView = root.findViewById(R.id.noTasksAdd);
+
         mNoTasksAddView.setOnClickListener(v -> showAddTask());
 
+
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab_add_task);
+        fab.setImageResource(R.drawable.ic_add);
+        fab.setOnClickListener(v -> mPresenter.addNewTask());
+
+        final ScrollChildSwipeRefreshLayout swipeRefreshLayout =
+                root.findViewById(R.id.refresh_layout);
+        swipeRefreshLayout.setColorSchemeColors(
+                ContextCompat.getColor(getActivity(), R.color.colorPrimary),
+                ContextCompat.getColor(getActivity(), R.color.colorAccent),
+
+                ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
+
+
+        swipeRefreshLayout.setScrollUpChild(listView);
+
+        swipeRefreshLayout.setOnRefreshListener(() -> mPresenter.loadTasks(false));
+
         setHasOptionsMenu(true);
+
 
         return root;
 

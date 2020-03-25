@@ -27,7 +27,7 @@ public class ScrollChildSwipeRefreshLayout extends SwipeRefreshLayout {
         return super.canChildScrollUp();
     }
 
-    public void aetScrollUpChild(View view) {
+    public void setScrollUpChild(View view) {
         mScrollUpChild = view;
     }
 }
